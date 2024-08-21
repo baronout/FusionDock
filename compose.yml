@@ -1,0 +1,39 @@
+services: 
+  web01:
+    build:
+      context: ./web01
+      dockerfile: Dockerfile
+    image: web01
+    container_name: web01
+    networks:
+      - asa-net
+
+  dns:
+    build:
+      context: ./dns
+      dockerfile: Dockerfile
+    image: dns
+    container_name: dns
+    ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+    networks:
+      - asa-net
+
+  proxy:
+    build:
+      context: ./proxy
+      dockerfile: Dockerfile
+    image: proxy
+    container_name: proxy
+    ports:
+      - "8080:80"
+    depends_on:
+      - web01
+    networks:
+      - asa-net
+
+networks:
+  asa-net:
+    driver: bridge
+
