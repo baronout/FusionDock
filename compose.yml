@@ -35,6 +35,7 @@ services:
 
   wordpress:
     image: wordpress
+    container_name: wordpress
     restart: always
     environment:
       WORDPRESS_DB_HOST: db
@@ -46,6 +47,7 @@ services:
 
   db:
     image: mysql:8.0
+    container_name: db
     restart: always
     environment:
       MYSQL_DATABASE: exampledb
