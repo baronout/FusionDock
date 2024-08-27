@@ -1,10 +1,10 @@
 services: 
-  web01:
+  web:
     build:
-      context: ./web01
+      context: ./web
       dockerfile: Dockerfile
-    image: web01
-    container_name: web01
+    image: web
+    container_name: web
     networks:
       - asa-net
 
@@ -27,9 +27,10 @@ services:
     image: proxy
     container_name: proxy
     ports:
-      - "8080:80"
+      - "80:80"
     depends_on:
-      - web01
+      - web
+      - wordpress
     networks:
       - asa-net
 
@@ -44,6 +45,8 @@ services:
       WORDPRESS_DB_NAME: exampledb
     volumes:
       - wordpress:/var/www/html
+    networks:
+      - asa-net
 
   db:
     image: mysql:8.0
@@ -56,6 +59,8 @@ services:
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
       - db:/var/lib/mysql
+    networks:
+      - asa-net
 
 volumes:
   wordpress:
@@ -63,5 +68,6 @@ volumes:
     
 networks:
   asa-net:
+    name: asa-net
     driver: bridge
 
