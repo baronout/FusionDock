@@ -28,6 +28,7 @@ services:
     container_name: proxy
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - web
       - wordpress
@@ -38,6 +39,8 @@ services:
     image: wordpress
     container_name: wordpress
     restart: always
+    depends_on:
+      - db
     environment:
       WORDPRESS_DB_HOST: db
       WORDPRESS_DB_USER: exampleuser
