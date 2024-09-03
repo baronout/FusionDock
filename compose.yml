@@ -19,6 +19,17 @@ services:
       - "53:53/udp"
     networks:
       - asa-net
+  dns-jc:
+    build:
+      context: ./dns-jc
+      dockerfile: Dockerfile
+    image: slave
+    container_name: slave
+    ports:
+      - "1053:53/tcp"
+      - "1053:53/udp"
+    networks:
+      - asa-net
 
   proxy:
     build:
@@ -32,6 +43,7 @@ services:
     depends_on:
       - web
       - wordpress
+      - wordpress2
     networks:
       - asa-net
 
@@ -65,9 +77,40 @@ services:
     networks:
       - asa-net
 
+  wordpress2:
+    image: wordpress
+    container_name: wordpress2
+    restart: always
+    depends_on:
+      - db2
+    environment:
+      WORDPRESS_DB_HOST: db2
+      WORDPRESS_DB_USER: exampleuser2
+      WORDPRESS_DB_PASSWORD: examplepass2
+      WORDPRESS_DB_NAME: exampledb2
+    volumes:
+      - wordpress2:/var/www/html
+    networks:
+      - asa-net
+
+  db2:
+    image: mysql:8.0
+    container_name: db2
+    restart: always
+    environment:
+      MYSQL_DATABASE: exampledb2
+      MYSQL_USER: exampleuser2
+      MYSQL_PASSWORD: examplepass2
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db2:/var/lib/mysql
+    networks:
+      - asa-net
 volumes:
   wordpress:
   db:
+  wordpress2:
+  db2:
     
 networks:
   asa-net:

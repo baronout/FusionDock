@@ -1,0 +1,16 @@
+;
+; BIND data file for local loopback interface
+;
+$TTL	604800
+@	IN	SOA	ifrn.asa.br. root.ifrn.asa.br. (
+			20240903  ; Serial
+			 604800		; Refresh
+			  86400		; Retry
+			2419200		; Expire
+			 604800 )	; Negative Cache TTL
+;
+@   IN  NS      ns.ifrn.asa.br.
+@   IN  A       10.0.0.127
+ns  IN  A       10.0.0.127
+jc	IN	A		10.0.0.127
+www IN  CNAME   ns

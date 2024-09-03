@@ -1,4 +1,6 @@
 zone "ifrn.asa.br" { // Change to desired zone
 	type master;
     file "/etc/bind/ifrn.asa.br";
+    allow-transfer { 10.0.0.127; };
 };
+
