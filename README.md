@@ -4,7 +4,7 @@
 
 ## Recursos do Projeto
 
-- **2 Servidores DNS** 🌐: Utilizando BIND9, configurados para a zona `ifrn.asa.br` com delegação para um dos campus do IF selecionado.
+- **2 Servidores DNS** 🌐: Utilizando BIND9, configurados para a zona `ifrn.asa.br` com delegação para o campus do IFRN JOão Câmara.
 - **1 Servidor Webmail** 📧: Fornecendo serviços de e-mail para comunicação eficiente.
 - **1 Servidor SMTP/IMAP** ✉️: Gerencia o envio e recebimento de e-mails.
 - **1 Proxy** 🔒: Oferece serviços de proxy para controle e segurança do tráfego.
