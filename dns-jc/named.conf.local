@@ -1,5 +1,5 @@
 zone "jc.ifrn.asa.br" {
     type slave;
-    file "/var/cache/bind/jc.ifrn.asa.br";
-    masters { 10.0.0.127; };  # IP do servidor DNS master
+    file "/etc/bind/jc.ifrn.asa.br";
+    masters { 10.0.0.127; };
 };

@@ -23,8 +23,8 @@ services:
     build:
       context: ./dns-jc
       dockerfile: Dockerfile
-    image: slave
-    container_name: slave
+    image: dns-jc
+    container_name: dns-jc
     ports:
       - "1053:53/tcp"
       - "1053:53/udp"
@@ -106,12 +106,51 @@ services:
       - db2:/var/lib/mysql
     networks:
       - asa-net
+
+  webmail:
+    build:
+      context: ./webmail
+      dockerfile: Dockerfile
+    image: webmail
+    container_name: webmail
+    ports:
+      - "25:25"
+      - "143:143"
+      - "993:993"
+    networks:
+      - asa-net
+  
+  postfixadmin:
+    depends_on:
+      - db3
+    image: postfixadmin
+    ports:
+      - 8000:80
+    restart: always
+    environment:
+      POSTFIXADMIN_DB_TYPE: mysqli
+      POSTFIXADMIN_DB_HOST: db3
+      POSTFIXADMIN_DB_USER: postfixadmin
+      POSTFIXADMIN_DB_NAME: postfixadmin
+      POSTFIXADMIN_DB_PASSWORD: example
+
+  db3:
+    image: mysql:8.0
+    container_name: db3
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+      MYSQL_DATABASE: postfixadmin
+      MYSQL_USER: postfixadmin
+      MYSQL_PASSWORD: example
+
 volumes:
   wordpress:
   db:
   wordpress2:
   db2:
-    
+
+
 networks:
   asa-net:
     name: asa-net
