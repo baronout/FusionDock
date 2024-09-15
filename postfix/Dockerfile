@@ -2,12 +2,8 @@ FROM ubuntu:latest
 
 RUN apt-get update -y && \
     apt-get upgrade -y
-RUN apt-get install -y postfix
-RUN apt-get install -y dovecot-core dovecot-imapd dovecot-pop3d 
-RUN apt-get install -y mailutils
-RUN apt-get install -y telnet
+RUN apt-get install -y postfix dovecot-core dovecot-imapd dovecot-pop3d mailutils telnet
 RUN apt-get install -y -q syslog-ng
-
 
 COPY main.cf /etc/postfix/
 COPY master.cf /etc/postfix/
@@ -30,16 +26,6 @@ RUN echo "joao:redes"|chpasswd
 RUN echo "maria:redes"|chpasswd 
 RUN echo "bob:redes"|chpasswd 
 RUN echo "silvio:redes"|chpasswd 
-
-RUN mkdir /home/joao/Maildir
-RUN mkdir /home/maria/Maildir
-RUN chown -R joao:joao /home/joao/Maildir
-RUN chown -R maria:maria /home/maria/Maildir
-RUN chmod -R 700 /home/joao/Maildir
-RUN chmod -R 700 /home/maria/Maildir
-
-
-
 
 CMD service syslog-ng start && \
     service postfix start && \

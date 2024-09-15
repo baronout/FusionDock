@@ -1,7 +1,8 @@
 FROM nginx:latest
 
-RUN apt-get update && apt-get install -y dnsutils
-RUN apt-get upgrade -y
+RUN apt-get update -y && \
+    apt-get upgrade -y && \
+    apt-get install -y dnsutils
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 

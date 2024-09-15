@@ -142,9 +142,6 @@ services:
     image: nextcloud
     container_name: webmail
     restart: always
-
-    ports:
-      - 8080:80
     links:
       - db3
     volumes:
@@ -157,6 +154,18 @@ services:
       - MYSQL_HOST=db3
     networks:
       - asa-net
+
+  ssh:
+    build:
+      context: ./ssh
+      dockerfile: Dockerfile
+    image: ssh
+    container_name: ssh
+    ports:
+      - "2222:22"
+    networks:
+      - asa-net
+
 
 volumes:
   wordpress:
