@@ -107,48 +107,64 @@ services:
     networks:
       - asa-net
 
-  webmail:
+  postfix:
     build:
-      context: ./webmail
+      context: ./postfix
       dockerfile: Dockerfile
-    image: webmail
-    container_name: webmail
+    image: postfix
+    container_name: postfix
     ports:
       - "25:25"
       - "143:143"
       - "993:993"
+      - "110:110"
+      - "465:465"
+      - "587:587"
     networks:
       - asa-net
   
-  postfixadmin:
-    depends_on:
-      - db3
-    image: postfixadmin
-    ports:
-      - 8000:80
-    restart: always
-    environment:
-      POSTFIXADMIN_DB_TYPE: mysqli
-      POSTFIXADMIN_DB_HOST: db3
-      POSTFIXADMIN_DB_USER: postfixadmin
-      POSTFIXADMIN_DB_NAME: postfixadmin
-      POSTFIXADMIN_DB_PASSWORD: example
-
   db3:
-    image: mysql:8.0
+    image: mariadb:10.6
     container_name: db3
     restart: always
+    command: --transaction-isolation=READ-COMMITTED --log-bin=binlog --binlog-format=ROW
+    volumes:
+      - db3:/var/lib/mysql
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
-      MYSQL_DATABASE: postfixadmin
-      MYSQL_USER: postfixadmin
-      MYSQL_PASSWORD: example
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+    networks:
+      - asa-net
+
+  webmail:
+    image: nextcloud
+    container_name: webmail
+    restart: always
+
+    ports:
+      - 8080:80
+    links:
+      - db3
+    volumes:
+      - nextcloud:/var/www/html
+      - ./webmail/config.php:/var/www/html/config/config.php
+    environment:
+      - MYSQL_PASSWORD=admin
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+      - MYSQL_HOST=db3
+    networks:
+      - asa-net
 
 volumes:
   wordpress:
   db:
   wordpress2:
   db2:
+  nextcloud:
+  db3:
 
 
 networks:
