@@ -57,4 +57,5 @@ $CONFIG = array (
       'verify_peer_name' => false,
     ),
   ),
+  'defaultapp' => '',
 );

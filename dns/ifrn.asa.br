@@ -15,4 +15,5 @@ ns  		IN  A   10.0.0.127
 web			IN	A	10.0.0.127
 portal		IN	A	10.0.0.127
 webmail		IN	A	10.0.0.127
+jc			IN	A	10.0.0.127
 www 		IN  CNAME   ns
