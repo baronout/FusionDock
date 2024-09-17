@@ -1,22 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-<title>Container 01</title>
-<style>
-html { color-scheme: light dark; }
-body { width: 35em; margin: 0 auto;
-font-family: Tahoma, Verdana, Arial, sans-serif; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUSIONDOCK</title>
+    <link rel="icon" href="./logo_fusiondock.png" type="image/x-icon"> <!-- Caminho para o favicon -->
+    <style>
+        html {
+            color-scheme: light dark;
+        }
+        body {
+            margin: 0;
+            font-family: Tahoma, Verdana, Arial, sans-serif;
+            color: #75B8D5; /* Azul mais claro para o texto */
+            background-image: url('/preto.png'); /* Imagem preta como plano de fundo */
+            background-size: cover; /* Faz com que a imagem cubra todo o fundo */
+            background-position: center; /* Centraliza a imagem */
+            background-repeat: no-repeat; /* Evita que a imagem se repita */
+            min-height: 100vh; /* Garante que o body ocupe pelo menos a altura total da viewport */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center; /* Alinha o texto centralizado no body */
+        }
+        .logo {
+            position: absolute; /* Posiciona a logo no topo da tela */
+            top: 5em; /* Distância do topo */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translateX(-50%); /* Ajusta a posição para o centro exato */
+            max-width: 300px; /* Define um tamanho máximo para a logo */
+        }
+        .content {
+            background: rgba(11, 27, 60, 0.9); /* Azul escuro semi-transparente para melhorar a legibilidade */
+            padding: 2em;
+            border-radius: 8px; /* Adiciona bordas arredondadas */
+            width: 50%; /* Define a largura da .content para evitar que ela fique muito larga */
+            color: #FFFFFF; /* Cor do texto dentro da .content */
+        }
+        h1 {
+            margin: 0; /* Remove margem padrão do título */
+            color: #75B8D5; /* Azul mais claro para o título */
+            text-align: center; /* Centraliza o título */
+            width: 100%; /* Garante que o título ocupe a largura total disponível */
+        }
+        p {
+            margin: 0.5em 0; /* Define margem para os parágrafos */
+            text-align: left; /* Alinha o texto dos parágrafos à esquerda */
+        }
+        .links {
+            text-align: center; /* Centraliza a lista de links */
+        }
+        .links ul {
+            list-style-type: none; /* Remove a marcação da lista */
+            padding: 0;
+        }
+        .links li {
+            margin: 0.5em 0;
+        }
+        .links a {
+            color: #0B5584; /* Azul normal para os links */
+            text-decoration: none; /* Remove o sublinhado dos links */
+        }
+        .links a:hover {
+            text-decoration: underline; /* Adiciona sublinhado ao passar o mouse */
+        }
+        .github-link {
+            margin-top: 2em; /* Espaço acima da seção do GitHub */
+            font-weight: bold; /* Destaca o link do GitHub */
+        }
+        .github-info {
+            display: flex; /* Usa o layout flexível */
+            align-items: center; /* Alinha verticalmente ao centro */
+            justify-content: center; /* Centraliza horizontalmente */
+            gap: 0.5em; /* Espaço entre o texto e o link */
+        }
+        .github-info span {
+            color: #75B8D5; /* Azul mais claro para o texto "Acesse o Projeto:" */
+        }
+    </style>
 </head>
-<body bgcolor="green">
-<h1>ASA 2024.1</h1>
-<p> Esse eh o container 01</p>
-
-<p>For online documentation and support please refer to
-<a href="http://nginx.org/">nginx.org</a>.<br/>
-Commercial support is available at
-<a href="http://nginx.com/">nginx.com</a>.</p>
-
-<p><em>Container 01.</em></p>
+<body>
+    <img src="./logo_fusiondock.png" alt="DockerFusion Logo" class="logo"> <!-- Caminho para a logo do DockerFusion -->
+    <div class="content">
+        <h1>FUSIONDOCK</h1>
+        <p>FusionDock é um projeto robusto e modular criado para a configuração e gestão de uma infraestrutura de serviços utilizando Docker. 
+            Desenvolvido como projeto final da matéria Administração de Sistemas Abertos.</p>
+        <p>Acesse as aplicações nos links abaixo:</p>
+        <div class="links">
+            <ul>
+                <li><a href="https://portal.ifrn.asa.br" target="_blank">Portal IFRN</a></li>
+                <li><a href="https://jc.ifrn.asa.br" target="_blank">IFRN João Câmara</a></li>
+                <li><a href="https://webmail.ifrn.asa.br" target="_blank">Webmail IFRN</a></li>
+            </ul>
+            <div class="github-link">
+                <div class="github-info">
+                    <span>Acesse o Projeto:</span>
+                    <a href="https://github.com/baronout/FusionDock" target="_blank">Github do Projeto</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
